@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .password:hover + .tooltip {
+            display: block;
+        }
+
+        .strength {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00509E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        button.invalid:hover {
+            position: relative;
+        }
+
+        button.invalid:hover::after {
+            content: "Please fill out all fields correctly";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: red;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <div>
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" required>
+            <div class="error" id="nameError"></div>
+        </div>
+        <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required>
+            <div class="error" id="emailError"></div>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" class="password" required>
+            <span class="tooltip">At least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character</span>
+            <div class="strength" id="passwordStrength"></div>
+            <div class="error" id="passwordError"></div>
+        </div>
+        <div>
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" required>
+            <div class="error" id="phoneError"></div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const fullName = document.getElementById('fullName');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const phone = document.getElementById('phone');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const phoneError = document.getElementById('phoneError');
+        const passwordStrength = document.getElementById('passwordStrength');
+
+        // Validation functions
+        function validateName() {
+            const regex = /^[A-Za-z ]{3,}$/;
+            if (!regex.test(fullName.value)) {
+                nameError.textContent = "Name must contain only alphabets and spaces (at least 3 characters).";
+                return false;
+            }
+            nameError.textContent = "";
+            return true;
+        }
+
+        function validateEmail() {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regex.test(email.value)) {
+                emailError.textContent = "Invalid email address.";
+                return false;
+            }
+            emailError.textContent = "";
+            return true;
+        }
+
+        function validatePassword() {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+            if (!regex.test(password.value)) {
+                passwordError.textContent = "Password does not meet the requirements.";
+                return false;
+            }
+            passwordError.textContent = "";
+            return true;
+        }
+
+        function validatePassword() {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&#]{6,}$/;
+    if (!regex.test(password.value)) {
+        passwordError.textContent = "Password must be at least 6 characters long and include at least one letter and one number.";
+        return false;
+    }
+    passwordError.textContent = "";
+    return true;
+}
+
+function checkPasswordStrength() {
+    const value = password.value;
+    if (value.length < 6) {
+        passwordStrength.textContent = "Weak";
+        passwordStrength.style.color = "red";
+    } else if (/^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(value)) {
+        passwordStrength.textContent = "Moderate";
+        passwordStrength.style.color = "orange";
+    } else if (/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(value)) {
+        passwordStrength.textContent = "Strong";
+        passwordStrength.style.color = "green";
+    }
+}
+
+
+        // Real-time validation
+        email.addEventListener('keyup', validateEmail);
+        password.addEventListener('keyup', () => {
+            checkPasswordStrength();
+            validatePassword();
+        });
+        fullName.addEventListener('keyup', validateName);
+        phone.addEventListener('keyup', validatePhone);
+
+        // Form submission validation
+        form.addEventListener('submit', (e) => {
+            if (!validateName() || !validateEmail() || !validatePassword() || !validatePhone()) {
+                e.preventDefault();
+                alert('Please fix the errors in the form.');
+            }
+        });
+    </script>
+</body>
+</html>

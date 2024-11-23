@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-card">
+        <h2>Login</h2>
+        <form action="dashboard.html" method="post">
+          <label for="loginEmail">Email</label>
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label for="loginPassword">Password</label>
+          <div class="password-toggle">
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Enter your password"
+              required
+            />
+            <span class="toggle-icon" onclick="togglePassword('loginPassword')"
+              >👁️</span
+            >
+          </div>
+
+          <div class="form-footer">
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+        <div class="toggle-link">
+          Don't have an account? <a href="signup.html">Signup</a>
+        </div>
+        <div class="social-login">
+          <button class="facebook"><span>📘</span> Login with Facebook</button>
+          <button class="google"><span>📷</span> Login with Google</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+      }
+    </script>
+  </body>
+</html>

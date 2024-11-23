@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Indicator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .strength-bar {
+            height: 10px;
+            width: 100%;
+            margin-top: 5px;
+            border-radius: 5px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+
+        .strength-bar span {
+            display: block;
+            height: 100%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .weak {
+            width: 33%;
+            background-color: red;
+        }
+
+        .moderate {
+            width: 66%;
+            background-color: yellow;
+        }
+
+        .strong {
+            width: 100%;
+            background-color: green;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .password-requirements li {
+            color: red;
+            list-style: none;
+        }
+
+        .password-requirements li.valid {
+            color: green;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00509E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" required>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+            <ul class="password-requirements">
+                <li id="length" class="invalid">At least 8 characters</li>
+                <li id="uppercase" class="invalid">At least 1 uppercase letter</li>
+                <li id="lowercase" class="invalid">At least 1 lowercase letter</li>
+                <li id="number" class="invalid">At least 1 number</li>
+                <li id="special" class="invalid">At least 1 special character</li>
+            </ul>
+            <div class="strength-bar">
+                <span id="strengthIndicator"></span>
+            </div>
+            <div class="error" id="passwordError"></div>
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" required>
+            <div class="error" id="confirmPasswordError"></div>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const strengthIndicator = document.getElementById('strengthIndicator');
+        const requirements = {
+            length: document.getElementById('length'),
+            uppercase: document.getElementById('uppercase'),
+            lowercase: document.getElementById('lowercase'),
+            number: document.getElementById('number'),
+            special: document.getElementById('special')
+        };
+
+        password.addEventListener('input', updateStrength);
+        confirmPassword.addEventListener('input', validateConfirmPassword);
+
+        function updateStrength() {
+            const value = password.value;
+            let strength = 0;
+
+            // Check each requirement
+            if (value.length >= 8) {
+                requirements.length.classList.add('valid');
+                strength++;
+            } else {
+                requirements.length.classList.remove('valid');
+            }
+
+            if (/[A-Z]/.test(value)) {
+                requirements.uppercase.classList.add('valid');
+                strength++;
+            } else {
+                requirements.uppercase.classList.remove('valid');
+            }
+
+            if (/[a-z]/.test(value)) {
+                requirements.lowercase.classList.add('valid');
+                strength++;
+            } else {
+                requirements.lowercase.classList.remove('valid');
+            }
+
+            if (/\d/.test(value)) {
+                requirements.number.classList.add('valid');
+                strength++;
+            } else {
+                requirements.number.classList.remove('valid');
+            }
+
+            if (/[@$!%*?&#]/.test(value)) {
+                requirements.special.classList.add('valid');
+                strength++;
+            } else {
+                requirements.special.classList.remove('valid');
+            }
+
+            // Update strength bar
+            if (strength <= 1) {
+                strengthIndicator.className = 'weak';
+            } else if (strength <= 3) {
+                strengthIndicator.className = 'moderate';
+            } else {
+                strengthIndicator.className = 'strong';
+            }
+        }
+
+        function validateConfirmPassword() {
+            if (confirmPassword.value !== password.value) {
+                confirmPasswordError.textContent = 'Passwords do not match.';
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+        }
+
+        const form = document.getElementById('registrationForm');
+        form.addEventListener('submit', (e) => {
+            if (confirmPassword.value !== password.value) {
+                e.preventDefault();
+                confirmPasswordError.textContent = 'Passwords do not match.';
+            }
+        });
+    </script>
+</body>
+</html>

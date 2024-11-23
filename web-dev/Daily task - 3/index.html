@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px 10%;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #00509E;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px 10px;
+        }
+
+        nav a:hover {
+            background-color: #003366;
+            border-radius: 5px;
+        }
+
+        .carousel {
+            position: relative;
+            margin: 20px auto;
+            width: 80%;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        section {
+            padding: 40px 10%;
+        }
+
+        .ai-product {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .ai-product img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+
+        .case-study, .blog {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form input, form textarea, form button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #00509E;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .stats div {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .ai-product {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .ai-product img {
+                margin-bottom: 10px;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to AI Solutions</h1>
+        <p>Innovative AI products and services to transform your business</p>
+    </header>
+    <nav>
+        <a href="#featured">Featured AI Solutions</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section id="featured">
+        <h2>Featured AI Solutions</h2>
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="ai-product1.jpg" alt="AI Product 1">
+                <img src="ai-product2.jpg" alt="AI Product 2">
+                <img src="ai-product3.jpg" alt="AI Product 3">
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-button" id="prev">&#10094;</button>
+                <button class="carousel-button" id="next">&#10095;</button>
+            </div>
+        </div>
+    </section>
+    <section id="case-studies">
+        <h2>Case Studies</h2>
+        <div class="case-study">
+            <h3>Case Study 1</h3>
+            <p>A brief description of how our AI solutions solved a real-world problem.</p>
+        </div>
+        <div class="case-study">
+            <h3>Case Study 2</h3>
+            <p>Another example of our innovative AI applications in action.</p>
+        </div>
+    </section>
+    <section id="blog">
+        <h2>Blog</h2>
+        <div class="blog">
+            <h3>AI in 2024: Trends and Innovations</h3>
+            <p>Explore the latest advancements in artificial intelligence.</p>
+        </div>
+        <div class="blog">
+            <h3>How AI is Transforming Industries</h3>
+            <p>Learn how AI is making an impact across various sectors.</p>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    <section id="stats">
+        <h2>AI Facts and Statistics</h2>
+        <div class="stats">
+            <div id="stat1">Loading...</div>
+            <div id="stat2">Loading...</div>
+            <div id="stat3">Loading...</div>
+        </div>
+    </section>
+    <script>
+        // Carousel functionality
+        const carouselImages = document.querySelector('.carousel-images');
+        const images = document.querySelectorAll('.carousel-images img');
+        let index = 0;
+
+        document.getElementById('next').addEventListener('click', () => {
+            index = (index + 1) % images.length;
+            carouselImages.style.transform = `translateX(-${index * 100}%)`;
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            index = (index - 1 + images.length) % images.length;
+            carouselImages.style.transform = `translateX(-${index * 100}%)`;
+        });
+
+        // Contact form validation
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message!');
+        });
+
+        // Display AI statistics dynamically
+        const stats = [
+            'AI adoption has grown by 270% in the last four years.',
+            'Global AI revenue is expected to reach $500 billion by 2024.',
+            '60% of companies plan to implement AI solutions in the next year.'
+        ];
+
+        const statElements = [document.getElementById('stat1'), document.getElementById('stat2'), document.getElementById('stat3')];
+
+        stats.forEach((stat, index) => {
+            setTimeout(() => {
+                statElements[index].textContent = stat;
+            }, index * 2000); // Show each stat with a delay of 2 seconds
+        });
+    </script>
+</body>
+</html>
+

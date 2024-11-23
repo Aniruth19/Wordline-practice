@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <h2>Signup</h2>
+            <form action="welcome.html" method="post">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                
+                <label for="signupPassword">Create Password</label>
+                <div class="password-toggle">
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                    <span class="toggle-icon" onclick="togglePassword('signupPassword')">👁️</span>
+                </div>
+                
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-toggle">
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    <span class="toggle-icon" onclick="togglePassword('confirmPassword')">👁️</span>
+                </div>
+                
+                <button type="submit">Signup</button>
+            </form>
+            <div class="toggle-link">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+            <div class="social-login">
+                <button class="facebook"><span>📘</span> Signup with Facebook</button>
+                <button class="google"><span>📷</span> Signup with Google</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>
